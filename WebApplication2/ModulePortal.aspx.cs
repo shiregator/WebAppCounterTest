@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.IO.Pipes;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ModuleExe;
 
 namespace WebApplication2
 {
@@ -24,8 +28,38 @@ namespace WebApplication2
 
 		protected void StartModule(object sender, System.EventArgs e)
 		{
-			System.Diagnostics.Process p = System.Diagnostics.Process.Start("C:\\Utilities\\Module.exe");
-			if ((System.Diagnostics.Process)Session["moduleProcess"] == null)
+		    var p = new System.Diagnostics.Process
+		    {
+		        StartInfo = {FileName = @"C:\dev\WebAppCounterTest\ModuleExe\bin\Debug\ModuleExe.exe"}
+		    };
+
+		    using (AnonymousPipeServerStream pipeServer = new AnonymousPipeServerStream(PipeDirection.In, HandleInheritability.Inheritable))
+		    {
+		        // Pass the client process a handle to the server.
+		        p.StartInfo.Arguments =
+		            pipeServer.GetClientHandleAsString();
+		        p.StartInfo.UseShellExecute = false;
+		        p.Start();
+
+		        pipeServer.DisposeLocalCopyOfClientHandle();
+
+		        using (StreamReader sr = new StreamReader(pipeServer))
+		        {
+		            string temp;
+
+                    // We would obviously not peg the CPU in production. This is just to illustrate waiting.
+		            while (sr.ReadLine() != "SYNC");
+
+		            while ((temp = sr.ReadLine()) != null)
+		            {
+		                Debug.WriteLine("Message from external application: " + temp);
+		            }
+		        }
+            }
+
+		    // I assume the reason you're doing this is so that each user has their own process?
+                // If not, I would suggest placing the process into a static variable or, depending on the load
+                if ((System.Diagnostics.Process)Session["moduleProcess"] == null)
 			{
 				Session["moduleProcess"] = p;
 			}
