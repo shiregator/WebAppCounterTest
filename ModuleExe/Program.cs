@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.MemoryMappedFiles;
 using System.IO.Pipes;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -44,33 +46,26 @@ namespace ModuleExe
             System.Diagnostics.Debug.WriteLine("Main() moduleCount = " + module.GetCount());
             System.Console.WriteLine("Main() moduleCount = " + module.GetCount());
 
-            // Send a random number to the web application
-            var randomNumber = new Random();
-
-            if (args.Length > 0)
+            using (var mmf = MemoryMappedFile.CreateFromFile(Path.GetTempFileName(), FileMode.Open, "ImgA", 1024))
             {
-                using (PipeStream pipeClient = new AnonymousPipeClientStream(PipeDirection.Out, args[0]))
+                using (var accessor = mmf.CreateViewAccessor(1, 16))
                 {
-                    using (StreamWriter sw = new StreamWriter(pipeClient))
+                    VegasObject vegas = new VegasObject()
                     {
-                        do
-                        {
-                            sw.AutoFlush = true;
-                            
-                            sw.WriteLine("SYNC");
-                            pipeClient.WaitForPipeDrain();
+                        Count = 42 // The answer to everything
+                    };
 
-                            var randomMessage = randomNumber.Next();
-                            sw.WriteLine(randomMessage.ToString());
-                            Debug.WriteLine("Sent web application a message: " + randomMessage.ToString());
+                    accessor.Write(0, ref vegas);
+                    accessor.Flush();
 
-                            // Simulate some work being done
-                            Thread.Sleep(1000);
-
-                        } while (true);
-                    }
+                    Console.ReadLine();
                 }
             }
         }
+    }
+
+    public struct VegasObject
+    {
+        public int Count;
     }
 }
