@@ -26,7 +26,7 @@ namespace WebApplication2
 
 		protected void StartModule(object sender, System.EventArgs e)
 		{
-            System.Diagnostics.Process p = System.Diagnostics.Process.Start(@"C:\ws\VS\Projects\WebAppCounterTest-reflection-enhancement\Process2\Process2\bin\Debug\Process2.exe");
+            System.Diagnostics.Process p = System.Diagnostics.Process.Start(@"C:\ws\VS\Projects\WebAppCounterTest-MMF-in-ram\WebAppCounterTest-MMF-in-ram\Process2\Process2\bin\Debug\Process2.exe");
             SharedMemory<MyData> shmem = new SharedMemory<MyData>("Count", 32);
             if (!shmem.Open()) return;
             MyData data = new MyData();
