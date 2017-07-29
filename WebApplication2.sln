@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication2", "WebApplication2\WebApplication2.csproj", "{68DC3298-3E59-41B9-A3FE-77865B2474BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetSharedMemory", "..\NetSharedMemory\NetSharedMemory.csproj", "{58AE8BAF-E56C-4B92-AF3D-B17718C901BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Process2", "..\Process2\Process2\Process2.csproj", "{55278933-9A06-44D2-81EF-94DD2A012F81}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{68DC3298-3E59-41B9-A3FE-77865B2474BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68DC3298-3E59-41B9-A3FE-77865B2474BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68DC3298-3E59-41B9-A3FE-77865B2474BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68DC3298-3E59-41B9-A3FE-77865B2474BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58AE8BAF-E56C-4B92-AF3D-B17718C901BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58AE8BAF-E56C-4B92-AF3D-B17718C901BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58AE8BAF-E56C-4B92-AF3D-B17718C901BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58AE8BAF-E56C-4B92-AF3D-B17718C901BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55278933-9A06-44D2-81EF-94DD2A012F81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55278933-9A06-44D2-81EF-94DD2A012F81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55278933-9A06-44D2-81EF-94DD2A012F81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55278933-9A06-44D2-81EF-94DD2A012F81}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
