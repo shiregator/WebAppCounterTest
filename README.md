@@ -1,5 +1,5 @@
 # WebAppCounterTest
-C# ASP.NET Web Application Counter Test
+C# ASP.NET Web Application Counter Test Example
 
 This is a simple example application that demonstrates how to share a serializable data object between two processes.
 The following implementations can be viewed in the branches
